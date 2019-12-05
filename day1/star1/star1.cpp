@@ -1,4 +1,3 @@
-// header
 #include "pch.h"
 #include <iostream>
 #include <fstream>
@@ -12,18 +11,17 @@ int calcFuelPerModule(int);
 
 int calcFuelPerMass(int);
 
+void part1(vector<int>);
+
+void part2(vector<int>);
+
 int main()
 {
-	int totalFuel = 0;
 
 	vector<int> modulesMass = readInput("../inputDay1.txt");
 	
-
-	for (const int &mass: modulesMass){
-		totalFuel += calcFuelPerModule(mass);
-	}
-
-    cout << totalFuel << endl;
+	part1(modulesMass);
+	part2(modulesMass);
 }
 
 vector<int> readInput(string adress) {
@@ -41,7 +39,29 @@ vector<int> readInput(string adress) {
 		getline(file, line);
 		input.push_back(stoi(line));
 	} while (!file.eof());
+
+	file.close();
 	return input;
+}
+
+void part1(vector<int> modulesMass) {
+	int totalFuel = 0;
+	
+	for (const int &mass : modulesMass) {
+		totalFuel += calcFuelPerMass(mass);
+	}
+
+	cout << "Part 1: fuel per for modules (fuel excluded): " << totalFuel << endl;
+}
+
+void part2(vector<int> modulesMass) {
+	int totalFuel = 0;
+
+	for (const int &mass : modulesMass) {
+		totalFuel += calcFuelPerModule(mass);
+	}
+
+	cout << "Part 2: fuel per for modules (fuel included): " << totalFuel << endl;
 }
 
 int calcFuelPerModule(int mass) {
